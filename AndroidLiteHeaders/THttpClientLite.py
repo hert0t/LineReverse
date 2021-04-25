@@ -112,5 +112,6 @@ class THttpClient(TTransportBase):
         self.__http.endheaders()
         self.__http.send(data)
         res = self.__http.getresponse()
-        self.__more = {"x-ls": res.getheader("x-ls")}
+        if not self.__more:
+            self.__more = {"x-ls": res.getheader("x-ls")}
         self.__rbuf = BytesIO(res.read())
